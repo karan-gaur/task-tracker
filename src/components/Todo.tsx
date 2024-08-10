@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import Form from "./Form";
 import TodoList from "./TodoList";
 import todoInterface from "./types";
 
 export default function Todo() {
-    const [todos, setTodos] = useState<todoInterface[]>([])
+    const [todos, setTodos] = useState<todoInterface[]>( () => {
+        const local = localStorage.getItem('tasks')
+        return local !== null ? JSON.parse(local) : [] 
+    })
+    useEffect( () => {
+        localStorage.setItem('tasks', JSON.stringify(todos))
+    })
+
     const completedTasks: number = todos.filter( (todo) => todo.done).length
     const totalTasks: number = todos.length
     return <div>
