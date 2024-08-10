@@ -1,15 +1,18 @@
 import TodoItem from "./TodoItem";
-
+import styles from "./todolist.module.css";
+import todoInterface from "./types";
 interface TodoListProps {
-    todos: string[]
+    todos: todoInterface[]
+    setTodos: React.Dispatch<React.SetStateAction<todoInterface[]>>;
 }
 
-export default function TodoList({ todos }: TodoListProps) {
+export default function TodoList({ todos, setTodos }: TodoListProps) {
+    const sortedTodos = todos.slice().sort( (a, b) => Number(a.done)-Number(b.done) )
     return (
-        <div>
+        <div className={styles.list}>
             {
-                todos.map((item: string, index: number) => (
-                    <TodoItem index={index} item={item} />
+                sortedTodos.map((item: todoInterface) => (
+                    <TodoItem key={item.key} item={item} setTodos={setTodos} todos={todos} />
                 )) 
             }
         </div>

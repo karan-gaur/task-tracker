@@ -1,12 +1,16 @@
 import { useState } from "react";
+import Footer from "./Footer";
 import Form from "./Form";
 import TodoList from "./TodoList";
+import todoInterface from "./types";
 
 export default function Todo() {
-    const [todos, setTodos] = useState<string[]>([])
-
+    const [todos, setTodos] = useState<todoInterface[]>([])
+    const completedTasks: number = todos.filter( (todo) => todo.done).length
+    const totalTasks: number = todos.length
     return <div>
         <Form todos={todos} setTodos={setTodos}/>
-        <TodoList todos={todos}/>
+        <TodoList todos={todos} setTodos={setTodos}/>
+        <Footer completedTasks={completedTasks} totalTasks={totalTasks}/>
     </div>
 }

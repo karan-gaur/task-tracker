@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import styles from "./form.module.css";
+import todoInterface from "./types";
 
 interface FormProps {
-    todos: string[];
-    setTodos: React.Dispatch<React.SetStateAction<string[]>>;
+    todos: todoInterface[];
+    setTodos: React.Dispatch<React.SetStateAction<todoInterface[]>>;
 }
 
 
@@ -12,7 +14,7 @@ export default function Form({ todos, setTodos} : FormProps) {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (todo.trim()) {
-            setTodos([...todos, todo]);
+            setTodos([...todos, {key: uuidv4(), name: todo, done: false}]);
             setTodo("");
         }
     }
