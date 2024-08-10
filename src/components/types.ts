@@ -1,5 +1,5 @@
 export default interface todoInterface {
-    key: number
+    key: string
     name: string
     done: boolean
 }

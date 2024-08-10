@@ -8,11 +8,11 @@ interface TodoItemProps {
 }
 
 export default function TodoItem({ item, todos, setTodos }: TodoItemProps) {
-    function handleDelete(key: number) {
+    function handleDelete(key: string) {
         setTodos(todos.filter((todo) => todo.key !== key));
     }
 
-    function handleClick(key: number) {
+    function handleClick(key: string) {
         const newArray = todos.map( (todo) => todo.key === key ? {...todo, done: !todo.done} : todo)
         setTodos(newArray)
     }
